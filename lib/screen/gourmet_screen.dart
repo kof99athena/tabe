@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -42,24 +43,50 @@ class _GourmetScreenState extends State<GourmetScreen> {
             child: Container(
               margin: EdgeInsets.all(8),
               child: Stack(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.centerLeft,
                 children: [
-                  Container(
-                      height: 200,
-                      width: double.infinity,
-                      child: gourmetItem['photo']['mobile']['l'] != null
-                          ? ClipRRect(
-                              child: Image.network(
-                                gourmetItem['photo']['mobile']['l'],
-                                fit: BoxFit.cover,
+                  Row(
+                    children: [
+                      Container(
+                          height: 200,
+                          width: 200,
+                          child: gourmetItem['photo']['mobile']['l'] != null
+                              ? ClipRRect(
+                                  child: Image.network(
+                                    gourmetItem['photo']['mobile']['l'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : ClipRRect(
+                                  child: Image.asset(
+                                    'assets/img_null',
+                                    fit: BoxFit.cover,
+                                  ),
+                                )),
+                      Expanded(
+                          child: Container(
+                        margin: EdgeInsets.only(left: 8, right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              gourmetItem['name'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'pretendard',
                               ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              gourmetItem['budget']['name'],
                             )
-                          : ClipRRect(
-                              child: Image.asset(
-                                'assets/img_null',
-                                fit: BoxFit.cover,
-                              ),
-                            ))
+                          ],
+                        ),
+                      ))
+                    ],
+                  )
                 ],
               ),
             ),
