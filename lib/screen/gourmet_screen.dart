@@ -27,7 +27,7 @@ class _GourmetScreenState extends State<GourmetScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text(
-          '지금의 도쿄 맛집',
+          '東京のおすすめレストラン',
           style: TextStyle(
               fontFamily: 'pretendard',
               fontSize: 20,
@@ -50,10 +50,10 @@ class _GourmetScreenState extends State<GourmetScreen> {
                       Container(
                           height: 200,
                           width: 200,
-                          child: gourmetItem['photo']['mobile']['l'] != null
+                          child: gourmetItem['photo']['pc']['l'] != null
                               ? ClipRRect(
                                   child: Image.network(
-                                    gourmetItem['photo']['mobile']['l'],
+                                    gourmetItem['photo']['pc']['l'],
                                     fit: BoxFit.cover,
                                   ),
                                 )
@@ -81,6 +81,10 @@ class _GourmetScreenState extends State<GourmetScreen> {
                             ),
                             Text(
                               gourmetItem['budget']['name'],
+                              style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: 12,
+                                  fontFamily: 'pretendard'),
                             )
                           ],
                         ),
@@ -90,6 +94,9 @@ class _GourmetScreenState extends State<GourmetScreen> {
                 ],
               ),
             ),
+            onTap: () {
+              Navigator.pushNamed(context, '/detail', arguments: gourmetItem);
+            },
           );
         },
       ),
